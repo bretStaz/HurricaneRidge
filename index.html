@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is Hurricane Ridge Open? | Live Status & Weather</title>
+  <meta name="description" content="Get instant, live updates on whether Olympic National Park's Hurricane Ridge road is open, full, or closed. Check current mountain weather, webcam, and FAQs.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts for Premium Brutalist/Neo-Brutalist Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Neo-Brutalist design tokens */
+    .neo-border {
+      border: 4px solid #000000;
+    }
+    .neo-border-thin {
+      border: 2px solid #000000;
+    }
+    .neo-shadow {
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    }
+    .neo-shadow-lg {
+      box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+    }
+    .neo-shadow-hover:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+    }
+    .neo-transition {
+      transition: all 0.15s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 font-sans selection:bg-yellow-300 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-neutral-950 text-white py-4 px-6 flex justify-between items-center border-b-4 border-black">
+    <div class="flex items-center gap-3">
+      <span class="inline-block w-4 h-4 bg-red-500 rounded-full border border-black animate-pulse shadow-sm"></span>
+      <h1 class="text-lg md:text-xl font-bold tracking-tight uppercase font-mono">Hurricane Ridge Live Status</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <!-- Menu Button -->
+      <button id="menu-btn" class="bg-yellow-300 hover:bg-yellow-400 text-black text-xs font-bold uppercase tracking-wider font-mono py-1.5 px-3 neo-border-thin shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-1px] active:translate-y-[1px] transition-all">
+        Menu
+      </button>
+      <span class="hidden sm:inline-block text-xs uppercase font-mono tracking-widest text-neutral-400 bg-neutral-800 py-1 px-3 neo-border-thin">Heart O' the Hills Gate</span>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="flex-1 flex flex-col">
+
+    <!-- Above the Fold (Utility Hero Section) -->
+    <!-- Guaranteed to fit without scrolling on mobile viewports -->
+    <section id="status-container" class="bg-neutral-200 text-neutral-800 py-8 px-6 md:py-16 md:px-12 flex flex-col justify-center items-center text-center border-b-4 border-black min-h-[45vh] neo-transition">
+      <div class="max-w-4xl mx-auto w-full flex flex-col items-center">
+        <!-- Pulse Status Indicator -->
+        <span class="text-xs md:text-sm uppercase font-mono tracking-widest font-bold bg-black text-white px-3 py-1 neo-border-thin mb-4">Current Entry Status</span>
+        
+        <!-- Giant status word -->
+        <div id="status-text" class="text-7xl sm:text-8xl md:text-9xl font-black tracking-tighter uppercase mb-4 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.15)] animate-bounce">
+          LOADING...
+        </div>
+        
+        <!-- Brief status message explanation -->
+        <p id="status-message" class="text-lg sm:text-xl md:text-2xl font-bold max-w-2xl leading-snug tracking-tight mb-6">
+          Fetching latest park status. Please wait...
+        </p>
+        
+        <!-- Timestamp of last update -->
+        <div id="last-updated" class="text-xs md:text-sm font-mono font-bold uppercase tracking-wider bg-white/20 px-3 py-1.5 rounded-full inline-block">
+          Checking status...
+        </div>
+      </div>
+    </section>
+
+    <!-- Below the Fold (SEO / Content Sections) -->
+    <!-- Two Column Grid for Weather and Webcam -->
+    <section class="max-w-6xl mx-auto w-full px-4 py-8 md:py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Column 1: Mountain Weather -->
+        <div class="bg-white p-6 neo-border neo-shadow neo-transition neo-shadow-hover flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center border-b-2 border-black pb-3 mb-6">
+              <h2 class="text-xl font-bold uppercase tracking-wide flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                </svg>
+                Mountain Weather
+              </h2>
+              <span class="text-xs font-mono font-bold bg-yellow-300 px-2 py-0.5 neo-border-thin">5,242 FT Elev.</span>
+            </div>
+            
+            <p class="text-neutral-500 font-mono text-xs uppercase mb-6">Current atmospheric conditions at the visitor center:</p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Temperature Card -->
+              <div class="bg-neutral-50 p-4 neo-border-thin flex flex-col justify-center">
+                <span class="text-xs uppercase font-mono tracking-wider text-neutral-500 mb-1">Temperature</span>
+                <span id="weather-temp" class="text-3xl sm:text-4xl font-extrabold font-mono">--°F</span>
+              </div>
+              
+              <!-- Wind Card -->
+              <div class="bg-neutral-50 p-4 neo-border-thin flex flex-col justify-center">
+                <span class="text-xs uppercase font-mono tracking-wider text-neutral-500 mb-1">Wind Speed</span>
+                <span id="weather-wind" class="text-2xl sm:text-3xl font-extrabold font-mono truncate">-- mph</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-4 border-t border-neutral-200">
+            <p class="text-xs text-neutral-500 italic">Weather details are updated hourly by Olympic National Park weather stations.</p>
+          </div>
+        </div>
+
+        <!-- Column 2: Live Webcam -->
+        <div class="bg-white p-6 neo-border neo-shadow neo-transition neo-shadow-hover flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center border-b-2 border-black pb-3 mb-6">
+              <h2 class="text-xl font-bold uppercase tracking-wide flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Live Webcam
+              </h2>
+              <span class="text-xs font-mono font-bold bg-green-400 px-2 py-0.5 neo-border-thin">Auto-Refresh</span>
+            </div>
+            
+            <p class="text-neutral-500 font-mono text-xs uppercase mb-4">View from the Hurricane Ridge Visitor Center webcam:</p>
+            
+            <div class="relative bg-neutral-900 neo-border-thin aspect-video overflow-hidden group">
+              <!-- Clickable Webcam Link -->
+              <a href="https://www.nps.gov/media/webcam/view.htm?id=81B46260-1DD8-B71B-0B7A7B41BF33172A&r=/olym/learn/photosmultimedia/hurricane-ridge-webcam.htm" target="_blank" rel="noopener noreferrer" class="block w-full h-full cursor-zoom-in" title="View live feed on NPS site">
+                <!-- Webcam Image -->
+                <img id="webcam-img" referrerpolicy="no-referrer" src="" alt="Hurricane Ridge Webcam Stream" class="w-full h-full object-cover transition-opacity duration-300 opacity-0" onload="this.classList.remove('opacity-0');" onerror="this.src='https://placehold.co/600x400/000000/FFFFFF?text=Webcam+Temporarily+Offline'">
+              </a>
+              <!-- Video Badge overlay -->
+              <span class="absolute top-2 left-2 bg-red-600 text-white font-mono text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest neo-border-thin flex items-center gap-1.5 shadow-md pointer-events-none">
+                <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span> Live View
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-xs text-neutral-500 italic">Note: High-elevation cameras are subject to extreme weather blockages and occasional system outages.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEO Content & AdSense Placement -->
+    <section class="max-w-4xl mx-auto w-full px-4 py-6 md:py-10">
+      
+      <!-- Ad Placeholder 1 -->
+      <!-- Ad Placeholder -->
+      <div class="my-8 p-6 bg-neutral-100 border-2 border-dashed border-neutral-400 text-center neo-shadow flex flex-col items-center justify-center min-h-[120px]">
+        <span class="text-xs uppercase font-mono tracking-widest text-neutral-500 mb-1">Sponsored Advertisement</span>
+        <span class="text-sm font-bold text-neutral-400">Ad Placeholder (Responsive Leaderboard / Banner)</span>
+      </div>
+
+      <!-- What does FULL status mean? -->
+      <article class="prose max-w-none mb-12">
+        <h2 class="text-3xl font-black uppercase tracking-tight mb-4 border-b-4 border-black pb-2">
+          What does a FULL status mean?
+        </h2>
+        <p class="text-base text-neutral-700 leading-relaxed mb-4">
+          When the parking capacity at the Hurricane Ridge Visitor Center reaches its absolute limit, Olympic National Park ranger staff must temporarily close the access road at the Heart O' the Hills entrance gate. This protocol is vital to maintain safety on the 17-mile mountain highway, protect delicate subalpine environments, and prevent dangerous overcrowding at the visitor center parking areas.
+        </p>
+        <p class="text-base text-neutral-700 leading-relaxed">
+          During peak tourist seasons—especially in summer and winter ski weekends—the status changes frequently. A "FULL" notification means that new vehicles will not be allowed past the lower toll gate until a sufficient number of vehicles exit the area. This is managed on a "one-in, one-out" basis, which can result in wait times at the gate exceeding one hour. We highly recommend waiting out the congestion at alternative scenic spots, or planning your ascent for early morning or late afternoon.
+        </p>
+      </article>
+
+      <!-- Ad Placeholder 2 -->
+      <!-- Ad Placeholder -->
+      <div class="my-8 p-6 bg-neutral-100 border-2 border-dashed border-neutral-400 text-center neo-shadow flex flex-col items-center justify-center min-h-[120px]">
+        <span class="text-xs uppercase font-mono tracking-widest text-neutral-500 mb-1">Sponsored Advertisement</span>
+        <span class="text-sm font-bold text-neutral-400">Ad Placeholder (In-Article Unit)</span>
+      </div>
+
+      <!-- Plan B alternatives -->
+      <article class="prose max-w-none mb-12">
+        <h2 class="text-3xl font-black uppercase tracking-tight mb-4 border-b-4 border-black pb-2">
+          Plan B: The Gate is Closed. Now What?
+        </h2>
+        <p class="text-base text-neutral-700 leading-relaxed mb-6">
+          If Hurricane Ridge is currently at capacity or fully closed, don't let it ruin your trip! Olympic National Park has countless breathtaking spots nearby. Here are three local alternatives you can explore right now:
+        </p>
+        <ul class="space-y-6">
+          <li class="p-5 bg-white neo-border neo-shadow neo-transition neo-shadow-hover">
+            <h3 class="text-xl font-bold uppercase mb-1">1. Lake Crescent</h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Located 18 miles west of Port Angeles, this stunning, deep glacier-carved lake offers pristine blue waters. You can walk the Spruce Railroad Trail along the north shore, rent a kayak, or enjoy a meal on the porch at the historic Lake Crescent Lodge.
+            </p>
+          </li>
+          <li class="p-5 bg-white neo-border neo-shadow neo-transition neo-shadow-hover">
+            <h3 class="text-xl font-bold uppercase mb-1">2. Marymere Falls</h3>
+            <p class="text-neutral-700 leading-relaxed">
+              A fantastic and accessible hike starting from the Storm King Ranger Station near Lake Crescent. This 1.8-mile round-trip trail leads you through a lush, old-growth temperate rainforest across scenic wooden bridges to a beautiful 90-foot waterfall.
+            </p>
+          </li>
+          <li class="p-5 bg-white neo-border neo-shadow neo-transition neo-shadow-hover">
+            <h3 class="text-xl font-bold uppercase mb-1">3. Dungeness Spit</h3>
+            <p class="text-neutral-700 leading-relaxed">
+              Located near Sequim, about 30 minutes east of Port Angeles, Dungeness Spit is the longest natural sand spit in the United States. Walk along the beach to the historic lighthouse, watch marine wildlife, and view the gorgeous Olympic Mountains from sea level.
+            </p>
+          </li>
+        </ul>
+      </article>
+
+      <!-- FAQ Section -->
+      <article class="prose max-w-none mb-12">
+        <h2 class="text-3xl font-black uppercase tracking-tight mb-6 border-b-4 border-black pb-2">
+          Frequently Asked Questions (FAQ)
+        </h2>
+        <div class="space-y-4">
+          <details class="bg-white neo-border p-4 neo-shadow group cursor-pointer" open>
+            <summary class="font-bold text-lg md:text-xl uppercase flex justify-between items-center list-none">
+              <span>Do I need a park pass if the status is "YES"?</span>
+              <span class="font-mono text-2xl transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <div class="mt-4 pt-4 border-t border-neutral-200 text-neutral-700 leading-relaxed">
+              Yes. A valid Olympic National Park entrance pass or a federal interagency pass (such as the America the Beautiful Annual Pass) is required for entry beyond the Heart O' the Hills gate. You can buy these online at Recreation.gov or directly at the entrance booth if it is staffed.
+            </div>
+          </details>
+
+          <details class="bg-white neo-border p-4 neo-shadow group cursor-pointer">
+            <summary class="font-bold text-lg md:text-xl uppercase flex justify-between items-center list-none">
+              <span>Are dogs allowed on the trails at Hurricane Ridge?</span>
+              <span class="font-mono text-2xl transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <div class="mt-4 pt-4 border-t border-neutral-200 text-neutral-700 leading-relaxed">
+              No, pets are not allowed on trails, in the wilderness, or on snow at Hurricane Ridge to protect local wildlife and ensure visitor safety. Dogs are only permitted in paved areas, campgrounds, and within 50 feet of roads. If traveling with pets, please explore pet-friendly national forest trails nearby.
+            </div>
+          </details>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-950 text-white py-8 px-6 text-center border-t-4 border-black font-mono text-sm">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>Not an official NPS site.</p>
+      <div class="flex flex-col sm:flex-row items-center gap-2 md:gap-4 text-xs">
+        <button id="menu-footer-btn" class="text-neutral-400 hover:text-white underline uppercase tracking-wider">About & Disclosures</button>
+        <span class="hidden sm:inline text-neutral-600">|</span>
+        <p class="text-neutral-400">Created for visitor convenience under poor reception areas.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Final Project -->
+
+  <!-- Vanilla JS Script to Fetch Status -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const statusContainer = document.getElementById("status-container");
+      const statusText = document.getElementById("status-text");
+      const statusMessage = document.getElementById("status-message");
+      const lastUpdated = document.getElementById("last-updated");
+      const weatherTemp = document.getElementById("weather-temp");
+      const weatherWind = document.getElementById("weather-wind");
+      const webcamImg = document.getElementById("webcam-img");
+
+      // Fetch status.json with cache-buster
+      fetch("./status.json?t=" + Date.now())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // 1. Update text elements
+          statusText.textContent = data.status || "UNKNOWN";
+          statusMessage.textContent = data.status_message || "No message available.";
+          lastUpdated.textContent = `Last updated: ${data.last_updated || "N/A"}`;
+          weatherTemp.textContent = data.weather_temp || "N/A";
+          weatherWind.textContent = data.weather_wind || "N/A";
+
+          // 2. Set webcam image with cache buster
+          if (data.webcam_url) {
+            const cacheBuster = `?t=${Date.now()}`;
+            webcamImg.src = `${data.webcam_url}${cacheBuster}`;
+          } else {
+            webcamImg.src = "https://placehold.co/600x400/000000/FFFFFF?text=Webcam+Unavailable";
+          }
+
+          // 3. Dynamic background class logic based on status
+          // First clean potential Tailwind colors
+          statusContainer.classList.remove(
+            "bg-neutral-200", "text-neutral-800",
+            "bg-green-600", "bg-yellow-500", "bg-red-600",
+            "text-white", "text-neutral-900"
+          );
+
+          const statusVal = (data.status || "").trim().toUpperCase();
+
+          if (statusVal === "YES") {
+            statusContainer.classList.add("bg-green-600", "text-white");
+          } else if (statusVal === "FULL") {
+            statusContainer.classList.add("bg-yellow-500", "text-neutral-900");
+          } else if (statusVal === "NO") {
+            statusContainer.classList.add("bg-red-600", "text-white");
+          } else {
+            // Default fallback
+            statusContainer.classList.add("bg-neutral-800", "text-white");
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching status.json:", error);
+          statusText.textContent = "OFFLINE";
+          statusMessage.textContent = "Unable to retrieve status. Double-check your cell service or refresh.";
+          lastUpdated.textContent = "Failed to synchronize";
+          statusContainer.classList.remove("bg-neutral-200", "text-neutral-800");
+          statusContainer.classList.add("bg-red-700", "text-white");
+        });
+
+      // ---------------------------------------------------------
+      // Menu Modal Interactivity (About, Feedback & Ad Choices)
+      // ---------------------------------------------------------
+      const menuBtn = document.getElementById("menu-btn");
+      const menuFooterBtn = document.getElementById("menu-footer-btn");
+      const infoModal = document.getElementById("info-modal");
+      const closeInfoModalBtn = document.getElementById("close-info-modal-btn");
+      const copyEmailBtn = document.getElementById("copy-email-btn");
+      const copySuccessMsg = document.getElementById("copy-success-msg");
+
+      const openModal = () => {
+        infoModal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      };
+
+      const closeModal = () => {
+        infoModal.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+        if (copySuccessMsg) copySuccessMsg.classList.add("hidden");
+      };
+
+      if (menuBtn) menuBtn.addEventListener("click", openModal);
+      if (menuFooterBtn) menuFooterBtn.addEventListener("click", openModal);
+      if (closeInfoModalBtn) closeInfoModalBtn.addEventListener("click", closeModal);
+
+      // Close if user clicks background overlay outside modal box
+      infoModal.addEventListener("click", (e) => {
+        if (e.target === infoModal) {
+          closeModal();
+        }
+      });
+
+      // Copy email to clipboard
+      if (copyEmailBtn) {
+        copyEmailBtn.addEventListener("click", () => {
+          navigator.clipboard.writeText("info@onptripbuilder.com")
+            .then(() => {
+              if (copySuccessMsg) {
+                copySuccessMsg.classList.remove("hidden");
+                setTimeout(() => {
+                  copySuccessMsg.classList.add("hidden");
+                }, 3000);
+              }
+            })
+            .catch(err => {
+              console.error("Could not copy email address: ", err);
+            });
+        });
+      }
+    });
+  </script>
+
+  <!-- Info & Disclosures Modal Overlay -->
+  <div id="info-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white neo-border neo-shadow-lg max-w-xl w-full p-6 relative flex flex-col max-h-[90vh]">
+      <!-- Close Button -->
+      <button id="close-info-modal-btn" class="absolute top-3 right-4 text-3xl font-bold font-mono text-neutral-800 hover:text-red-600 transition-colors" aria-label="Close modal">&times;</button>
+      
+      <!-- Modal Title -->
+      <h3 class="text-2xl font-black uppercase tracking-tight border-b-4 border-black pb-2 text-neutral-900 mb-4">
+        Info & Disclosures
+      </h3>
+
+      <!-- Scrollable content -->
+      <div class="overflow-y-auto pr-2 space-y-6 flex-1 text-sm text-neutral-700 leading-relaxed">
+        
+        <!-- About the Team -->
+        <section class="space-y-3">
+          <h4 class="text-lg font-extrabold uppercase text-neutral-900 border-b-2 border-black pb-1">
+            About the Team
+          </h4>
+          <p>
+            We are a husband-and-wife team who have called Port Angeles home for nearly a decade. Living at the gateway to the Olympics, we’ve spent years exploring every winding trail, hidden beach, and local gem this incredible region has to offer.
+          </p>
+          <p>
+            We built this application to bridge the gap between "visiting" and truly "experiencing" the Peninsula. We wanted to create a tool that goes beyond a static map, helping you navigate our backyard with the confidence of a local—even when the Wi-Fi drops out.
+          </p>
+          <p>
+            Whether you are here for a weekend or a week, we’re honored to help you plan your perfect Olympic adventure.
+          </p>
+        </section>
+
+        <!-- Feedback & Contact -->
+        <section class="space-y-3 bg-neutral-50 p-4 border-2 border-black neo-shadow">
+          <h4 class="text-lg font-extrabold uppercase text-neutral-900">
+            We'd Love to Hear From You!
+          </h4>
+          <p>
+            Have feedback, feature requests, or a story from your trip? Copy our email below to get in touch:
+          </p>
+          <div class="flex items-center gap-2 mt-2 bg-white p-2 neo-border-thin">
+            <span class="font-mono font-bold text-neutral-900 select-all break-all flex-1">info@onptripbuilder.com</span>
+            <button id="copy-email-btn" class="bg-yellow-300 hover:bg-yellow-400 text-black text-xs font-mono font-bold uppercase py-1 px-3 neo-border-thin transition-colors">
+              Copy
+            </button>
+          </div>
+          <span id="copy-success-msg" class="text-xs text-green-600 font-bold hidden">Email copied to clipboard!</span>
+        </section>
+
+        <!-- Ad Choices & Cookies -->
+        <section class="space-y-3">
+          <h4 class="text-lg font-extrabold uppercase text-neutral-900 border-b-2 border-black pb-1">
+            Ad Choices & Cookies
+          </h4>
+          <p>
+            Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.
+          </p>
+          <p>
+            Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the internet.
+          </p>
+          <p>
+            Users may opt out of personalized advertising by visiting Ads Settings. Alternatively, you can direct users to opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" class="underline font-bold text-neutral-900 hover:text-neutral-600">www.aboutads.info</a>.
+          </p>
+          
+          <!-- Action Buttons -->
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <a href="https://adssettings.google.com/anonymous?hl=en" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-yellow-300 hover:bg-yellow-400 text-black py-2.5 px-4 font-bold neo-border-thin neo-shadow text-xs uppercase tracking-wider transition-all hover:translate-y-[-1px] active:translate-y-[1px]">
+              Google Ads Settings
+            </a>
+            <a href="https://youradchoices.com/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-white hover:bg-neutral-100 text-black py-2.5 px-4 font-bold neo-border-thin neo-shadow text-xs uppercase tracking-wider transition-all hover:translate-y-[-1px] active:translate-y-[1px]">
+              Your Ad Choices
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

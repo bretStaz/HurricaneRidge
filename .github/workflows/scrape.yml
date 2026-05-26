@@ -1,0 +1,51 @@
+name: Fetch Live status.json
+
+on:
+  schedule:
+    # Run every 5 minutes to keep status.json fresh
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # Allows manual trigger from the Actions tab
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to push commits back to the repository
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Execute the status updater script
+      - name: Run status update script
+        env:
+          NPS_API_KEY: ${{ secrets.NPS_API_KEY }}
+        run: python update_status.py
+
+      # Step 5: Check for changes, commit status.json, and push
+      - name: Commit and push changes if updated
+        run: |
+          # Check if status.json is modified compared to the repository HEAD
+          if git diff --quiet status.json; then
+            echo "No changes detected in status.json. Skipping commit."
+          else
+            echo "Changes detected in status.json. Committing..."
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add status.json
+            git commit -m "Automated Status Update"
+            git push
+          fi
