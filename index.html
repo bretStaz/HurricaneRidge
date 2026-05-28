@@ -367,59 +367,67 @@
       const weatherWind = document.getElementById("weather-wind");
       const webcamImg = document.getElementById("webcam-img");
 
-      // Fetch status.json with cache-buster
-      fetch("./status.json?t=" + Date.now())
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          // 1. Update text elements
-          statusText.textContent = data.status || "UNKNOWN";
-          statusMessage.textContent = data.status_message || "No message available.";
-          lastUpdated.textContent = `Last updated: ${data.last_updated || "N/A"}`;
-          weatherTemp.textContent = data.weather_temp || "N/A";
-          weatherWind.textContent = data.weather_wind || "N/A";
+      const fetchStatus = () => {
+        // Fetch status.json with cache-buster
+        fetch("./status.json?t=" + Date.now())
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            // 1. Update text elements
+            statusText.textContent = data.status || "UNKNOWN";
+            statusMessage.textContent = data.status_message || "No message available.";
+            lastUpdated.textContent = `Last checked: ${data.last_updated || "N/A"}`;
+            weatherTemp.textContent = data.weather_temp || "N/A";
+            weatherWind.textContent = data.weather_wind || "N/A";
 
-          // 2. Set webcam image with cache buster
-          if (data.webcam_url) {
-            const cacheBuster = `?t=${Date.now()}`;
-            webcamImg.src = `${data.webcam_url}${cacheBuster}`;
-          } else {
-            webcamImg.src = "https://placehold.co/600x400/000000/FFFFFF?text=Webcam+Unavailable";
-          }
+            // 2. Set webcam image with cache buster
+            if (data.webcam_url) {
+              const cacheBuster = `?t=${Date.now()}`;
+              webcamImg.src = `${data.webcam_url}${cacheBuster}`;
+            } else {
+              webcamImg.src = "https://placehold.co/600x400/000000/FFFFFF?text=Webcam+Unavailable";
+            }
 
-          // 3. Dynamic background class logic based on status
-          // First clean potential Tailwind colors
-          statusContainer.classList.remove(
-            "bg-neutral-200", "text-neutral-800",
-            "bg-green-600", "bg-yellow-500", "bg-red-600",
-            "text-white", "text-neutral-900"
-          );
+            // 3. Dynamic background class logic based on status
+            // First clean potential Tailwind colors
+            statusContainer.classList.remove(
+              "bg-neutral-200", "text-neutral-800",
+              "bg-green-600", "bg-yellow-500", "bg-red-600",
+              "text-white", "text-neutral-900"
+            );
 
-          const statusVal = (data.status || "").trim().toUpperCase();
+            const statusVal = (data.status || "").trim().toUpperCase();
 
-          if (statusVal === "YES") {
-            statusContainer.classList.add("bg-green-600", "text-white");
-          } else if (statusVal === "FULL") {
-            statusContainer.classList.add("bg-yellow-500", "text-neutral-900");
-          } else if (statusVal === "NO") {
-            statusContainer.classList.add("bg-red-600", "text-white");
-          } else {
-            // Default fallback
-            statusContainer.classList.add("bg-neutral-800", "text-white");
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching status.json:", error);
-          statusText.textContent = "OFFLINE";
-          statusMessage.textContent = "Unable to retrieve status. Double-check your cell service or refresh.";
-          lastUpdated.textContent = "Failed to synchronize";
-          statusContainer.classList.remove("bg-neutral-200", "text-neutral-800");
-          statusContainer.classList.add("bg-red-700", "text-white");
-        });
+            if (statusVal === "YES") {
+              statusContainer.classList.add("bg-green-600", "text-white");
+            } else if (statusVal === "FULL") {
+              statusContainer.classList.add("bg-yellow-500", "text-neutral-900");
+            } else if (statusVal === "NO") {
+              statusContainer.classList.add("bg-red-600", "text-white");
+            } else {
+              // Default fallback
+              statusContainer.classList.add("bg-neutral-800", "text-white");
+            }
+          })
+          .catch(error => {
+            console.error("Error fetching status.json:", error);
+            statusText.textContent = "OFFLINE";
+            statusMessage.textContent = "Unable to retrieve status. Double-check your cell service or refresh.";
+            lastUpdated.textContent = "Failed to synchronize";
+            statusContainer.classList.remove("bg-neutral-200", "text-neutral-800");
+            statusContainer.classList.add("bg-red-700", "text-white");
+          });
+      };
+
+      // Run immediately on page load
+      fetchStatus();
+
+      // Auto-refresh the page status data in the background every 60 seconds
+      setInterval(fetchStatus, 60000);
 
       // ---------------------------------------------------------
       // Menu Modal Interactivity (About, Feedback & Ad Choices)
