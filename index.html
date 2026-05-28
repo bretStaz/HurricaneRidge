@@ -142,10 +142,15 @@
         <p id="status-message" class="text-lg sm:text-xl md:text-2xl font-bold max-w-2xl leading-snug tracking-tight mb-6">
           Fetching latest park status. Please wait...
         </p>
-        
         <!-- Timestamp of last update -->
-        <div id="last-updated" class="text-xs md:text-sm font-mono font-bold uppercase tracking-wider bg-white/20 px-3 py-1.5 rounded-full inline-block">
-          Checking status...
+        <div class="flex flex-col items-center gap-3">
+          <div id="last-updated" class="text-xs md:text-sm font-mono font-bold uppercase tracking-wider bg-white/20 px-3 py-1.5 rounded-full inline-block">
+            Checking status...
+          </div>
+          <!-- Live Browser Sync Status Indicator -->
+          <div id="sync-status" class="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 bg-neutral-900/60 px-3 py-1 neo-border-thin flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Syncing
+          </div>
         </div>
       </div>
     </section>
@@ -380,9 +385,18 @@
             // 1. Update text elements
             statusText.textContent = data.status || "UNKNOWN";
             statusMessage.textContent = data.status_message || "No message available.";
-            lastUpdated.textContent = `Last checked: ${data.last_updated || "N/A"}`;
+            lastUpdated.textContent = data.last_updated || "N/A";
             weatherTemp.textContent = data.weather_temp || "N/A";
             weatherWind.textContent = data.weather_wind || "N/A";
+
+            // Update browser sync time
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const syncStatus = document.getElementById("sync-status");
+            if (syncStatus) {
+              syncStatus.innerHTML = `<span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span> Live Sync: Connected (Checked at ${timeString})`;
+              syncStatus.className = "text-[10px] font-mono font-bold uppercase tracking-widest text-green-400 bg-neutral-900/60 px-3 py-1 neo-border-thin flex items-center gap-2";
+            }
 
             // 2. Set webcam image with cache buster
             if (data.webcam_url) {
@@ -417,6 +431,13 @@
             console.error("Error fetching status.json:", error);
             statusText.textContent = "OFFLINE";
             statusMessage.textContent = "Unable to retrieve status. Double-check your cell service or refresh.";
+            
+            const syncStatus = document.getElementById("sync-status");
+            if (syncStatus) {
+              syncStatus.innerHTML = `<span class="w-2 h-2 bg-red-500 rounded-full"></span> Live Sync: Connection Lost`;
+              syncStatus.className = "text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 bg-red-950/40 px-3 py-1 neo-border-thin flex items-center gap-2 animate-pulse";
+            }
+            
             lastUpdated.textContent = "Failed to synchronize";
             statusContainer.classList.remove("bg-neutral-200", "text-neutral-800");
             statusContainer.classList.add("bg-red-700", "text-white");
