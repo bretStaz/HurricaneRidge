@@ -1,8 +1,8 @@
 {
-  "status": "ERROR",
-  "status_message": "NPS API is currently unreachable.",
-  "last_updated": "Updated Today at 10:09 PM PDT",
+  "status": "YES",
+  "status_message": "Gate is open. Drive safely and expect lines at the toll booth.",
+  "last_updated": "Updated Today at 1:39 AM PDT",
   "weather_temp": "43°F",
-  "weather_wind": "3 mph SW",
+  "weather_wind": "3 mph WSW",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
