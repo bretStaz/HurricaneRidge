@@ -1,8 +1,8 @@
 {
-  "status": "YES",
-  "status_message": "Hurricane Ridge Road is open. Due to incoming weather, the road will close to uphill traffic at 4:00pm. All traffic must be below the Heart o' the Hills gate by 5:00pm.",
-  "last_updated": "Updated Today at 2:10 PM PST",
-  "weather_temp": "39°F",
-  "weather_wind": "2 mph S",
+  "status": "NO",
+  "status_message": "Hurricane Ridge Road is closed due to incoming weather. The road will reopen when conditions permit.",
+  "last_updated": "Updated Today at 6:22 PM PST",
+  "weather_temp": "35°F",
+  "weather_wind": "6 to 14 mph S",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
