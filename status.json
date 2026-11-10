@@ -1,8 +1,8 @@
 {
-  "status": "NO",
-  "status_message": "Hurricane Ridge Road is closed due to snow and ice.",
-  "last_updated": "Updated Today at 1:18 AM PST",
-  "weather_temp": "35°F",
-  "weather_wind": "9 to 13 mph S",
+  "status": "YES",
+  "status_message": "Hurricane Ridge Road will open for the day. The road will close to uphill traffic at Heart o' the Hills entrance station at 4pm, and all cars will need to be below the gate by 5pm.",
+  "last_updated": "Updated Today at 9:05 AM PST",
+  "weather_temp": "49°F",
+  "weather_wind": "5 to 14 mph SSW",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
