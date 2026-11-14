@@ -1,8 +1,8 @@
 {
-  "status": "NO",
-  "status_message": "Hurricane Ridge Road is closed due to forecasted overnight snow.",
-  "last_updated": "Updated Today at 11:38 PM PST",
-  "weather_temp": "35°F",
-  "weather_wind": "8 mph SSW",
+  "status": "ERROR",
+  "status_message": "NPS API is currently unreachable.",
+  "last_updated": "Updated Today at 6:28 AM PST",
+  "weather_temp": "38°F",
+  "weather_wind": "2 to 13 mph S",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
