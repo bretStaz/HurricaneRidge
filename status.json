@@ -1,8 +1,8 @@
 {
-  "status": "YES",
-  "status_message": "Hurricane Ridge Road is open. The uphill gate with close today at 4pm and all vehicles must be below the gate by 5pm. The overnight closure is in effect due to incoming weather.",
-  "last_updated": "Updated Today at 1:00 PM PST",
+  "status": "NO",
+  "status_message": "Hurricane Ridge Road is closed due to forecasted overnight snow.",
+  "last_updated": "Updated Today at 5:19 PM PST",
   "weather_temp": "45°F",
-  "weather_wind": "7 mph S",
+  "weather_wind": "6 mph S",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
