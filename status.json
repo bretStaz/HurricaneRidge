@@ -1,8 +1,8 @@
 {
   "status": "ERROR",
   "status_message": "NPS API is currently unreachable.",
-  "last_updated": "Updated Today at 1:46 AM PST",
-  "weather_temp": "33°F",
-  "weather_wind": "13 to 22 mph SSW",
+  "last_updated": "Updated Today at 8:37 AM PST",
+  "weather_temp": "38°F",
+  "weather_wind": "5 to 13 mph SSW",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
