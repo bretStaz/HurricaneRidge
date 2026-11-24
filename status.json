@@ -1,8 +1,8 @@
 {
-  "status": "NO",
-  "status_message": "Hurricane Ridge Road is closed due to snow and ice. The road will reopen when conditions permit.",
-  "last_updated": "Updated Today at 6:21 AM PST",
+  "status": "YES",
+  "status_message": "Gate is open. Drive safely and expect lines at the toll booth.",
+  "last_updated": "Updated Today at 5:43 PM PST",
   "weather_temp": "33°F",
-  "weather_wind": "5 to 16 mph SSW",
+  "weather_wind": "15 mph S",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
