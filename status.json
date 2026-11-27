@@ -1,8 +1,8 @@
 {
-  "status": "YES",
-  "status_message": "Gate is open. Drive safely and expect lines at the toll booth.",
-  "last_updated": "Updated Today at 7:09 AM PST",
+  "status": "NO",
+  "status_message": "Road will open at 9am. All vehicles must carry traction devices. The uphill gate closes at 4pm; all vehicles must be below the entrance station by 5pm. Lifts and children’s sledding area closed. No potable water, or food service are available.",
+  "last_updated": "Updated Today at 3:23 PM PST",
   "weather_temp": "32°F",
-  "weather_wind": "0 to 7 mph SW",
+  "weather_wind": "1 mph W",
   "webcam_url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
 }
